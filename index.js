@@ -109,11 +109,11 @@ Toolkit.run(async (tools) => {
 
     let currentVersionName = semver.clean(versionNameRegexPattern.exec(fileContent)[0].replace("versionName ", "").replace("\"", "").replace("\"", ""))
     let currentVersionCode = versionCodeRegexPattern.exec(fileContent)[0].replace("versionCode ", "");
-    console.log(`Current version: ${currentVersionName}`);
+    console.log(`Current iOS version: ${currentVersionName}`);
     let newVersionName = semver.inc(currentVersionName, version);
     let newVersionCode = semver2int(newVersionName);
     console.log(newVersionName);
-    console.log(`New version: ${newVersionName}`);
+    console.log(`New Android version: ${newVersionName}`);
     let newFileContent = fileContent.toString().replace(`versionName "${currentVersionName}"`, `versionName "${newVersionName}"`);
     newFileContent = newFileContent.toString().replace(`versionCode ${currentVersionCode}`, `versionCode ${newVersionCode}`)
     
@@ -124,8 +124,8 @@ Toolkit.run(async (tools) => {
     let fileContent = fs.readFileSync(PbxPath);
 
     let currentiOSVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
-    console.log(`Current version: ${currentiOSVersionName}`);
-    console.log(`New version: ${newVersionName}`);
+    console.log(`Current iOS version: ${currentiOSVersionName}`);
+    console.log(`New iOS version: ${newVersionName}`);
     let newiOSFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentiOSVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
     newiOSFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentiOSVersionName}`, `MARKETING_VERSION = ${newVersionName}`)
     

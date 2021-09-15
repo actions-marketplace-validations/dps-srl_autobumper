@@ -29,7 +29,7 @@ inputs:
     default: ''
     required: true
   PBX_PATH:
-    description: 'Custom dir to the project file'
+    description: 'Custom dir to the pbx file'
     default: ''
     required: true
   default:
