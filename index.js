@@ -119,9 +119,9 @@ Toolkit.run(async (tools) => {
     
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
-    const versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+(\.[0-9]+)+);/;
+    versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+(\.[0-9]+)+);/;
 
-    let fileContent = fs.readFileSync(PbxPath);
+    fileContent = fs.readFileSync(PbxPath);
 
     let currentiOSVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
     console.log(`Current iOS version: ${currentiOSVersionName}`);
