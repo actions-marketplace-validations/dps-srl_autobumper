@@ -98,9 +98,9 @@ Toolkit.run(async (tools) => {
 
     // Incrementing the version by version tag
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
-    const versionCodeRegexPattern = /versionCode [0-9]+/;
+    let versionCodeRegexPattern = /versionCode [0-9]+/;
     // versionName — A string used as the version number shown to users [...] -> https://developer.android.com/studio/publish/versioning
-    const versionNameRegexPattern = /versionName "[^"]*"/;
+    let versionNameRegexPattern = /versionName "[^"]*"/;
 
     let fileContent = fs.readFileSync(gradlePath);
 
