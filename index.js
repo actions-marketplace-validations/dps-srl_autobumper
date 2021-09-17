@@ -121,13 +121,13 @@ Toolkit.run(async (tools) => {
     // versionCode — A positive integer [...] -> https://developer.android.com/studio/publish/versioning
     versionCodeRegexPattern = /CURRENT_PROJECT_VERSION = ([0-9]+(\.[0-9]+)+);/;
 
-    fileContent = fs.readFileSync(PbxPath);
+    let iosFileContent = fs.readFileSync(PbxPath);
 
-    let currentiOSVersionName = semver.clean(versionCodeRegexPattern.exec(fileContent.toString())[1]);
+    let currentiOSVersionName = semver.clean(versionCodeRegexPattern.exec(iosFileContent.toString())[1]);
     console.log(`Current iOS version: ${currentiOSVersionName}`);
     console.log(`New iOS version: ${newVersionName}`);
-    let newiOSFileContent = fileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentiOSVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
-    newiOSFileContent = newFileContent.toString().replace(`MARKETING_VERSION = ${currentiOSVersionName}`, `MARKETING_VERSION = ${newVersionName}`)
+    let newiOSFileContent = iosFileContent.toString().replace(`CURRENT_PROJECT_VERSION = "${currentiOSVersionName}"`, `CURRENT_PROJECT_VERSION = "${newVersionName}"`);
+    newiOSFileContent = newiOSFileContent.toString().replace(`MARKETING_VERSION = ${currentiOSVersionName}`, `MARKETING_VERSION = ${newVersionName}`)
     
     
     let newVersion;
@@ -167,7 +167,7 @@ Toolkit.run(async (tools) => {
         // do it in the current checked out github branch (DETACHED HEAD)
         console.log('currentBranch:', currentBranch);
 
-        // Writing the new version to the gradle file
+        // Writing the new version to the gradle and pbx file
         fs.writeFileSync(gradlePath, newFileContent);
         fs.writeFileSync(PbxPath, newiOSFileContent);
 
